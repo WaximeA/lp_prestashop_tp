@@ -195,10 +195,6 @@
                    {/block}
                  </div>
 
-                 <div>
-                     {hook h='maCommentaires' product=$product}
-                 </div>
-
                  {block name='product_details'}
                    {include file='catalog/_partials/product-details.tpl'}
                  {/block}
@@ -227,10 +223,13 @@
                    {$extra.content nofilter}
                  </div>
                  {/foreach}
-              </div>  
+              </div>
             </div>
           {/block}
         </div>
+      </div>
+      <div>
+          {hook h='maCommentaires' product=$product}
       </div>
     </div>
 
