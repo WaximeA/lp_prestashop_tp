@@ -43,6 +43,7 @@ class Ma_Commentaires extends Module
         return parent::install() &&
             $this->registerHook('maCommentaires') &&
             $this->registerHook('actionFrontControllerSetMedia') &&
+            $this->installDb() &&
             Configuration::updateValue('MACOMMENTAIRES_NAME', 'my friend') &&
             Configuration::updateValue('MA_COMMENTAIRES_OPT1', true) &&
             Configuration::updateValue('MA_COMMENTAIRES_OPT2', true) &&
@@ -60,5 +61,16 @@ class Ma_Commentaires extends Module
             ));
 
         return $this->display(__FILE__, 'ma_commentaires.tpl');
+    }
+
+    public function installDB()
+    {
+        $return = true;
+        $return &= Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `"._DB_PREFIX_."macommentaires`(
+            `id_macommentaire` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+            `message` VARCHAR(256) NOT NULL ,
+            `pseudo` VARCHAR(256) NOT NULL ,
+        )');
+        return $return;
     }
 }
