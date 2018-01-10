@@ -44,10 +44,7 @@ class Ma_Commentaires extends Module
             $this->registerHook('maCommentaires') &&
             $this->registerHook('actionFrontControllerSetMedia') &&
             $this->installDb() &&
-            Configuration::updateValue('MACOMMENTAIRES_NAME', 'my friend') &&
-            Configuration::updateValue('MA_COMMENTAIRES_OPT1', true) &&
-            Configuration::updateValue('MA_COMMENTAIRES_OPT2', true) &&
-            Configuration::updateValue('MA_COMMENTAIRES_OPT3', true)
+            Configuration::updateValue('MACOMMENTAIRES_NAME', 'my friend')
             ;
     }
 
@@ -65,12 +62,17 @@ class Ma_Commentaires extends Module
 
     public function installDB()
     {
+        /** @var string $table */
+        $table = _DB_PREFIX_ . 'macommentaires';
         $return = true;
-        $return &= Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `"._DB_PREFIX_."macommentaires`(
-            `id_macommentaire` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-            `message` VARCHAR(256) NOT NULL ,
-            `pseudo` VARCHAR(256) NOT NULL ,
-        )');
+        $return &= Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `'.$table.'` (
+              `id_comment` int(11) NOT NULL AUTO_INCREMENT,
+              `comment` varchar(255) NOT NULL,
+              `user` varchar(255) NOT NULL,
+              `date_add` datetime NOT NULL,
+              PRIMARY KEY (`id_comment`)
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+        ');
         return $return;
     }
 }
