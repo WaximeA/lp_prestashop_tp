@@ -25,9 +25,9 @@ class Ma_Commentaires extends Module
 
 
         $this->displayName = $this->l('MA Commentaires');
-        $this->description = $this->l('Ceci est un module de commentaire présent sur les pages produits');
+        $this->description = $this->l('Ceci est un module de commentaires présent sur les pages produits');
 
-        $this->confirmUninstall = $this->l('Êtes-vous sûr de vouloir désinstaller le module MA Commentaire ?');
+        $this->confirmUninstall = $this->l('Êtes-vous sûr de vouloir désinstaller ce module ?');
 
         if (!Configuration::get('MACOMMENTAIRES_NAME')) {
             $this->warning = $this->l('No name provided');
@@ -41,8 +41,7 @@ class Ma_Commentaires extends Module
         }
 
         return parent::install() &&
-            $this->registerHook('leftColumn') &&
-            $this->registerHook('rightColumn') &&
+            $this->registerHook('maCommentaires') &&
             $this->registerHook('actionFrontControllerSetMedia') &&
             Configuration::updateValue('MACOMMENTAIRES_NAME', 'my friend') &&
             Configuration::updateValue('MA_COMMENTAIRES_OPT1', true) &&
@@ -51,7 +50,7 @@ class Ma_Commentaires extends Module
             ;
     }
 
-    public function hookDisplayFooterProduct($params)
+    public function hookMaCommentaires($params)
     {
         $this->context->smarty->assign(
             array(
