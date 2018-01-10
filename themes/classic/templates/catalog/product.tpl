@@ -46,7 +46,6 @@
 {/block}
 
 {block name='content'}
-
   <section id="main" itemscope itemtype="https://schema.org/Product">
     <meta itemprop="url" content="{$product.url}">
 
@@ -194,6 +193,10 @@
                    {block name='product_description'}
                      <div class="product-description">{$product.description nofilter}</div>
                    {/block}
+                 </div>
+
+                 <div>
+                     {hook h='maCommentaires' product=$product}
                  </div>
 
                  {block name='product_details'}
