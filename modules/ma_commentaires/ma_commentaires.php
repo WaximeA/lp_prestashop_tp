@@ -33,4 +33,21 @@ class Ma_Commentaires extends Module
             $this->warning = $this->l('No name provided');
         }
     }
+
+    public function install()
+    {
+        if (Shop::isFeatureActive()) {
+            Shop::setContext(Shop::CONTEXT_ALL);
+        }
+
+        return parent::install() &&
+            $this->registerHook('leftColumn') &&
+            $this->registerHook('rightColumn') &&
+            $this->registerHook('actionFrontControllerSetMedia') &&
+            Configuration::updateValue('MACOMMENTAIRES_NAME', 'my friend') &&
+            Configuration::updateValue('MA_COMMENTAIRES_OPT1', true) &&
+            Configuration::updateValue('MA_COMMENTAIRES_OPT2', true) &&
+            Configuration::updateValue('MA_COMMENTAIRES_OPT3', true)
+            ;
+    }
 }
