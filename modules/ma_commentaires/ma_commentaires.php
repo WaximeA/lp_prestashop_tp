@@ -50,4 +50,16 @@ class Ma_Commentaires extends Module
             Configuration::updateValue('MA_COMMENTAIRES_OPT3', true)
             ;
     }
+
+    public function hookDisplayFooterProduct($params)
+    {
+        $this->context->smarty->assign(
+            array(
+                'ma_commentaires_name' => Configuration::get('MACOMMENTAIRES_NAME'),
+                'ma_commentaires_link' => $this->context->link->getModuleLink('ma_commentaires',
+                    'display')
+            ));
+
+        return $this->display(__FILE__, 'ma_commentaires.tpl');
+    }
 }
