@@ -50,11 +50,15 @@ class Ma_Commentaires extends Module
 
     public function hookMaCommentaires($params)
     {
+        /** @var int $productId */
+        $productId = $params['product']['id'];
+
         $this->context->smarty->assign(
             array(
                 'ma_commentaires_name' => Configuration::get('MACOMMENTAIRES_NAME'),
                 'ma_commentaires_link' => $this->context->link->getModuleLink('ma_commentaires',
-                    'display')
+                    'display'),
+                'product_id' => $productId,
             ));
 
         return $this->display(__FILE__, 'ma_commentaires.tpl');
