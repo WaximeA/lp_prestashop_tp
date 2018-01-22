@@ -67,6 +67,7 @@ class Ma_Commentaires extends Module
         $return = true;
         $return &= Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `'.$table.'` (
               `id_comment` int(11) NOT NULL AUTO_INCREMENT,
+              `post_id` int(11) NOT NULL,
               `comment` varchar(255) NOT NULL,
               `user` varchar(255) NOT NULL,
               `date_add` datetime NOT NULL,
