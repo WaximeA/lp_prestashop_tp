@@ -53,14 +53,19 @@ class Ma_Commentaires extends Module
         /** @var int $productId */
         $productId = $params['product']['id'];
 
+        /** @var object $link */
+        $link = new Link();
+        /** @var string $url */
+        $url = $link->getProductLink($productId);
+
         $this->context->smarty->assign(
             array(
                 'ma_commentaires_name' => Configuration::get('MACOMMENTAIRES_NAME'),
                 'ma_commentaires_link' => $this->context->link->getModuleLink('ma_commentaires',
                     'display'),
                 'product_id' => $productId,
+                'url' => $url
             ));
-
         return $this->display(__FILE__, 'ma_commentaires.tpl');
     }
 
