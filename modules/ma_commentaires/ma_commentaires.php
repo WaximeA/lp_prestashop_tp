@@ -3,8 +3,20 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
+/**
+ * Class Ma_Commentaires
+ *
+ * @author                 Maxime AVELINE <aveline.maxime@gmail.com>
+ * @copyright              Copyright (c) 2018
+ * @license                http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link                   http://www.maximeaveline.fr/
+ */
 class Ma_Commentaires extends Module
 {
+
+    /**
+     * Ma_Commentaires constructor.
+     */
     public function __construct()
     {
         $this->name = 'ma_commentaires';
@@ -34,6 +46,9 @@ class Ma_Commentaires extends Module
         }
     }
 
+    /**
+     * @return bool
+     */
     public function install()
     {
         if (Shop::isFeatureActive()) {
@@ -48,6 +63,11 @@ class Ma_Commentaires extends Module
             ;
     }
 
+    /**
+     * @param $params
+     *
+     * @return string
+     */
     public function hookMaCommentaires($params)
     {
         /** @var int $productId */
@@ -69,6 +89,9 @@ class Ma_Commentaires extends Module
         return $this->display(__FILE__, 'ma_commentaires.tpl');
     }
 
+    /**
+     * @return bool
+     */
     public function installDB()
     {
         /** @var string $table */
