@@ -19,22 +19,19 @@ class Ma_Commentaires extends Module
      */
     public function __construct()
     {
-        $this->name = 'ma_commentaires';
-        $this->tab = 'front_office_features';
-        $this->version = '1.0.0';
-        $this->author = 'Maxime AVELINE';
-        $this->need_instance = 0;
-        $this->ps_versions_compliancy =
-            array(
-                'min' => '1.7',
-                'max' =>
-                    _PS_VERSION_
-            );
+        $this->name                   = 'ma_commentaires';
+        $this->tab                    = 'front_office_features';
+        $this->version                = '1.0.0';
+        $this->author                 = 'Maxime AVELINE';
+        $this->need_instance          = 0;
+        $this->ps_versions_compliancy = array(
+            'min' => '1.7',
+            'max' => _PS_VERSION_
+        );
 
         $this->bootstrap = true;
 
         parent::__construct();
-
 
         $this->displayName = $this->l('MA Commentaires');
         $this->description = $this->l('Ceci est un module de commentaires présent sur les pages produits');
@@ -55,12 +52,7 @@ class Ma_Commentaires extends Module
             Shop::setContext(Shop::CONTEXT_ALL);
         }
 
-        return parent::install() &&
-            $this->registerHook('maCommentaires') &&
-            $this->registerHook('actionFrontControllerSetMedia') &&
-            $this->installDb() &&
-            Configuration::updateValue('MACOMMENTAIRES_NAME', 'my friend')
-            ;
+        return parent::install() && $this->registerHook('maCommentaires') && $this->registerHook('actionFrontControllerSetMedia') && $this->installDb() && Configuration::updateValue('MACOMMENTAIRES_NAME', 'my friend');
     }
 
     /**
@@ -78,14 +70,13 @@ class Ma_Commentaires extends Module
         /** @var string $url */
         $url = $link->getProductLink($productId);
 
-        $this->context->smarty->assign(
-            array(
-                'ma_commentaires_name' => Configuration::get('MACOMMENTAIRES_NAME'),
-                'ma_commentaires_link' => $this->context->link->getModuleLink('ma_commentaires',
-                    'display'),
-                'product_id' => $productId,
-                'url' => $url
-            ));
+        $this->context->smarty->assign(array(
+            'ma_commentaires_name' => Configuration::get('MACOMMENTAIRES_NAME'),
+            'ma_commentaires_link' => $this->context->link->getModuleLink('ma_commentaires', 'display'),
+            'product_id'           => $productId,
+            'url'                  => $url
+        ));
+
         return $this->display(__FILE__, 'ma_commentaires.tpl');
     }
 
@@ -95,9 +86,9 @@ class Ma_Commentaires extends Module
     public function installDB()
     {
         /** @var string $table */
-        $table = _DB_PREFIX_ . 'macommentaires';
+        $table  = _DB_PREFIX_ . 'macommentaires';
         $return = true;
-        $return &= Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `'.$table.'` (
+        $return &= Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `' . $table . '` (
               `id_comment` int(11) NOT NULL AUTO_INCREMENT,
               `product_id` int(11) NOT NULL,
               `comment` varchar(255) NOT NULL,
@@ -106,6 +97,7 @@ class Ma_Commentaires extends Module
               PRIMARY KEY (`id_comment`)
             ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
         ');
+
         return $return;
     }
 }
