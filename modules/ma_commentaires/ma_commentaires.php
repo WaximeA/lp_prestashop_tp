@@ -14,6 +14,9 @@ if (!defined('_PS_VERSION_')) {
 class Ma_Commentaires extends Module
 {
 
+    /** @const string TABLE_NAME */
+    const TABLE_NAME = 'macommentaires';
+
     /**
      * Ma_Commentaires constructor.
      */
