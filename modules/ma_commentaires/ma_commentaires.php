@@ -59,6 +59,19 @@ class Ma_Commentaires extends Module
     }
 
     /**
+     * Get datetime with basic format
+     *
+     * @return string
+     */
+    public function getBasicDatetime()
+    {
+        /** @var string $basicDatetime */
+        $basicDatetime = date('Y-m-d h:i:s');
+
+        return $basicDatetime;
+    }
+
+    /**
      * @param $params
      *
      * @return string
