@@ -76,15 +76,16 @@ class Ma_Commentaires extends Module
      *
      * @return array
      */
-    public function getCommentInfos(){
+    public function getCommentInfos()
+    {
         /** @var string $username */
         $username = Tools::getValue('username');
         /** @var string $comment */
         $comment_message = Tools::getValue('comment_message');
         /** @var array $commentInfos */
         $commentInfos = [
-            'username'     => $username,
-            'comment_message'    => $comment_message,
+            'username'        => $username,
+            'comment_message' => $comment_message,
         ];
 
         return $commentInfos;
@@ -113,7 +114,10 @@ class Ma_Commentaires extends Module
         /** @var array $commentInfos */
         $commentInfos = $this->getCommentInfos();
         /** @var array $commentAdditionalInfos */
-        $commentAdditionalInfos = ['product_id' => $productId, 'date_add' => $basicDatetime];
+        $commentAdditionalInfos = [
+            'product_id' => $productId,
+            'date_add'   => $basicDatetime
+        ];
         /** @var array $FormInfos */
         $formInfos = $commentAdditionalInfos + $commentInfos;
 
@@ -123,12 +127,12 @@ class Ma_Commentaires extends Module
         $commentMessageIsSubmit = Tools::isSubmit('comment_message');
 
         /** @var string $selectCommentsSql */
-        $selectCommentsSql = 'SELECT * FROM '. _DB_PREFIX_ . self::TABLE_NAME .' WHERE `product_id` = '. $productId;
+        $selectCommentsSql = 'SELECT * FROM ' . _DB_PREFIX_ . self::TABLE_NAME . ' WHERE `product_id` = ' . $productId;
         /** @var array $comments */
         $allComments = $db->executeS($selectCommentsSql);
 
         // Check if comment form fields are filled to insert form's data
-        if  ($usernameIsSubmit && $commentMessageIsSubmit){
+        if ($usernameIsSubmit && $commentMessageIsSubmit) {
             $db->insert(self::TABLE_NAME, $formInfos);
         }
 
@@ -150,7 +154,7 @@ class Ma_Commentaires extends Module
     public function installDB()
     {
         $return = true;
-        $return &= Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `'. _DB_PREFIX_ . self::TABLE_NAME .'` (
+        $return &= Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . self::TABLE_NAME . '` (
               `id_comment` int(11) NOT NULL AUTO_INCREMENT,
               `product_id` int(11) NOT NULL,
               `comment_message` varchar(255) NOT NULL,
