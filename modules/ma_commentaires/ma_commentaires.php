@@ -72,23 +72,6 @@ class Ma_Commentaires extends Module
     }
 
     /**
-     * Get datetime with custom format
-     *
-     * @return string
-     */
-    public function getCustomDatetime()
-    {
-        /** @var string $basicDatetime */
-        $basicDatetime = $this->getBasicDatetime();
-        /** @var string $datetimeTimestamp */
-        $datetimeTimestamp = strtotime($basicDatetime);
-        /** @var string $customDatetime */
-        $customDatetime = date('d M. H:i', $datetimeTimestamp);
-
-        return $customDatetime;
-    }
-
-    /**
      * Get form's username and comment message
      *
      * @return array
@@ -121,8 +104,6 @@ class Ma_Commentaires extends Module
 
         /** @var string $basicDatetime */
         $basicDatetime = $this->getBasicDatetime();
-        /** @var string $customDatetime */
-        $customDatetime = $this->getCustomDatetime();
 
         /** @var int $productId */
         $productId = $params['product']['id'];
@@ -158,7 +139,6 @@ class Ma_Commentaires extends Module
             'product_id'           => $productId,
             'url'                  => $productUrl,
             'all_comments'         => $allComments,
-            'custom_date'          => $customDatetime,
         ));
 
         return $this->display(__FILE__, 'ma_commentaires.tpl');
