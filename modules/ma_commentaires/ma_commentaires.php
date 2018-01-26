@@ -114,19 +114,51 @@ class Ma_Commentaires extends Module
      */
     public function hookMaCommentaires($params)
     {
-        /** @var int $productId */
-        $productId = $params['product']['id'];
-
         /** @var object $link */
         $link = new Link();
-        /** @var string $url */
-        $url = $link->getProductLink($productId);
+        /** @var object $db */
+        $db = Db::getInstance(_PS_USE_SQL_SLAVE_);
 
+        /** @var string $basicDatetime */
+        $basicDatetime = $this->getBasicDatetime();
+        /** @var string $customDatetime */
+        $customDatetime = $this->getCustomDatetime();
+
+        /** @var int $productId */
+        $productId = $params['product']['id'];
+        /** @var string $productUrl */
+        $productUrl = $link->getProductLink($productId);
+
+        /** @var array $commentInfos */
+        $commentInfos = $this->getCommentInfos();
+        /** @var array $commentAdditionalInfos */
+        $commentAdditionalInfos = ['product_id' => $productId, 'date_add' => $basicDatetime];
+        /** @var array $FormInfos */
+        $formInfos = $commentAdditionalInfos + $commentInfos;
+
+        /** @var boolean $usernameSubmit */
+        $usernameIsSubmit = Tools::isSubmit('username');
+        /** @var boolean $commentMessageSubmit */
+        $commentMessageIsSubmit = Tools::isSubmit('comment_message');
+
+        /** @var string $selectCommentsSql */
+        $selectCommentsSql = 'SELECT * FROM '. _DB_PREFIX_ . self::TABLE_NAME .' WHERE `product_id` = '. $productId;
+        /** @var array $comments */
+        $allComments = $db->executeS($selectCommentsSql);
+
+        // Check if comment form fields are filled to insert form's data
+        if  ($usernameIsSubmit && $commentMessageIsSubmit){
+            $db->insert(self::TABLE_NAME, $formInfos);
+        }
+
+        // Assign data to send in the template
         $this->context->smarty->assign(array(
             'ma_commentaires_name' => Configuration::get('MACOMMENTAIRES_NAME'),
             'ma_commentaires_link' => $this->context->link->getModuleLink('ma_commentaires', 'display'),
             'product_id'           => $productId,
-            'url'                  => $url
+            'url'                  => $productUrl,
+            'all_comments'         => $allComments,
+            'custom_date'          => $customDatetime,
         ));
 
         return $this->display(__FILE__, 'ma_commentaires.tpl');
