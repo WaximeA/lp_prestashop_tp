@@ -1,6 +1,14 @@
 <div class="block-ma-commentaires">
     <h4>Commentaires : </h4>
-    <div id="display_commentaires"></div>
+    <div id="display_commentaires">
+        {foreach from=$all_comments key=key item=comment}
+            <ul>
+                <li>{$comment.username}</li>
+                <li>{$comment.comment_message}</li>
+                <li>{$comment.date_add|date_format:"%d %B %T"}</li>
+            </ul>
+        {/foreach}
+    </div>
     <h4>Publier un commentaire : </h4>
     <form action="{$url}" method="post">
         <label for="">Nom d'utilisateur :</label>
