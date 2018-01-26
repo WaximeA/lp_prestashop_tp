@@ -88,14 +88,12 @@ class Ma_Commentaires extends Module
      */
     public function installDB()
     {
-        /** @var string $table */
-        $table  = _DB_PREFIX_ . 'macommentaires';
         $return = true;
-        $return &= Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `' . $table . '` (
+        $return &= Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `'. _DB_PREFIX_ . self::TABLE_NAME .'` (
               `id_comment` int(11) NOT NULL AUTO_INCREMENT,
               `product_id` int(11) NOT NULL,
-              `comment` varchar(255) NOT NULL,
-              `user` varchar(255) NOT NULL,
+              `comment_message` varchar(255) NOT NULL,
+              `username` varchar(255) NOT NULL,
               `date_add` datetime NOT NULL,
               PRIMARY KEY (`id_comment`)
             ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
