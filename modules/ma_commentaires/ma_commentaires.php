@@ -72,6 +72,23 @@ class Ma_Commentaires extends Module
     }
 
     /**
+     * Get datetime with custom format
+     *
+     * @return string
+     */
+    public function getCustomDatetime()
+    {
+        /** @var string $basicDatetime */
+        $basicDatetime = $this->getBasicDatetime();
+        /** @var string $datetimeTimestamp */
+        $datetimeTimestamp = strtotime($basicDatetime);
+        /** @var string $customDatetime */
+        $customDatetime = date('d M. H:i', $datetimeTimestamp);
+
+        return $customDatetime;
+    }
+
+    /**
      * @param $params
      *
      * @return string
