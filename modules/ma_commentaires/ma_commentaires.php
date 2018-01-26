@@ -89,6 +89,25 @@ class Ma_Commentaires extends Module
     }
 
     /**
+     * Get form's username and comment message
+     *
+     * @return array
+     */
+    public function getCommentInfos(){
+        /** @var string $username */
+        $username = Tools::getValue('username');
+        /** @var string $comment */
+        $comment_message = Tools::getValue('comment_message');
+        /** @var array $commentInfos */
+        $commentInfos = [
+            'username'     => $username,
+            'comment_message'    => $comment_message,
+        ];
+
+        return $commentInfos;
+    }
+
+    /**
      * @param $params
      *
      * @return string
