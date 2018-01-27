@@ -1,5 +1,6 @@
-.block-ma-commentaires {
-
+.block-ma-commentaires h2 {
+    border-bottom: 1px solid #4f93ce;
+    padding: 30px;
 }
 
 .button-container {
