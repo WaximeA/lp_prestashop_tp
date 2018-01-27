@@ -144,3 +144,28 @@
 .comment-button:focus {
     outline: none;
 }
+
+.product-comments {
+    background-color: #eee;
+    padding: 20px 10px 20px 10px;
+    pointer-events: none;
+    color: #b3b3b3;
+    font-size: 1rem;
+    font-weight: normal;
+    transition: all 0.28s ease;
+}
+
+.product-comments li b {
+    font-size:20px;
+    margin-right:5px;
+    color: #4f93ce;
+}
+
+.product-comments li span {
+    font-size: 12px;
+    font-style: italic;
+}
+
+.product-comments li:last-child {
+    margin-top: 20px;
+}

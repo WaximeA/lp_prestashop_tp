@@ -16,10 +16,10 @@
         </form>
         <div id="display_commentaires">
             {foreach from=$all_comments key=key item=comment}
-                <ul>
-                    <li>{$comment.username}</li>
-                    <li>{$comment.comment_message}</li>
-                    <li>{$comment.date_add|date_format:"%d %B %T"}</li>
+                <ul class="product-comments">
+                    <li><b>{$comment.username}</b></li>
+                    <li><span>{$comment.date_add|date_format:"%d %B %T"}</span></li>
+                    <li class="product-comment">{$comment.comment_message}</li>
                 </ul>
             {/foreach}
         </div>
