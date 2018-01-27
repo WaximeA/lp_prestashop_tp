@@ -166,4 +166,16 @@ class Ma_Commentaires extends Module
 
         return $return;
     }
+
+    public function hookActionFrontControllerSetMedia($params)
+    {
+        $this->context->controller->registerStylesheet(
+            'module-ma_commentaires-style',
+            'modules/' . $this->name . '/css/macommentaires.css',
+            [
+                'media'    => 'all',
+                'priority' => 200,
+            ]
+        );
+    }
 }
