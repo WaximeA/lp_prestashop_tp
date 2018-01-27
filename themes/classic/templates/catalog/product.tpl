@@ -46,7 +46,6 @@
 {/block}
 
 {block name='content'}
-
   <section id="main" itemscope itemtype="https://schema.org/Product">
     <meta itemprop="url" content="{$product.url}">
 
@@ -224,10 +223,15 @@
                    {$extra.content nofilter}
                  </div>
                  {/foreach}
-              </div>  
+              </div>
             </div>
           {/block}
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+          {hook h='maCommentaires' product=$product}
       </div>
     </div>
 
